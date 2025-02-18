@@ -1,56 +1,38 @@
-
-CREATE TABLE pais (
-    id_pais   NUMBER PRIMARY KEY,
-    nome_pais VARCHAR(30)
-);
+INSERT INTO pais (id_pais, nome_pais) VALUES (1, 'Brasil');
+INSERT INTO pais (id_pais, nome_pais) VALUES (2, 'Estados Unidos');
+INSERT INTO pais (id_pais, nome_pais) VALUES (3, 'Argentina');
+INSERT INTO pais (id_pais, nome_pais) VALUES (4, 'França');
+INSERT INTO pais (id_pais, nome_pais) VALUES (5, 'Japão');
  
--- Criação da tabela estado com id_estado como PRIMARY KEY
-CREATE TABLE estado (
-    id_estado   NUMBER PRIMARY KEY, -- Corrigido: id_estado é PRIMARY KEY
-    nome_estado VARCHAR2(30),
-    id_pais     NUMBER
-);
+INSERT INTO estado (id_estado, nome_estado, id_pais) VALUES (1, 'São Paulo', 1);
+INSERT INTO estado (id_estado, nome_estado, id_pais) VALUES (2, 'Rio de Janeiro', 1);
+INSERT INTO estado (id_estado, nome_estado, id_pais) VALUES (3, 'California', 2);
+INSERT INTO estado (id_estado, nome_estado, id_pais) VALUES (4, 'Buenos Aires', 3);
+INSERT INTO estado (id_estado, nome_estado, id_pais) VALUES (5, 'Paris', 4);
  
--- Adiciona a chave estrangeira na tabela estado
-ALTER TABLE estado
-    ADD CONSTRAINT fk_estado FOREIGN KEY (id_pais)
-        REFERENCES pais (id_pais);
+INSERT INTO cidade (id_cidade, nome_cidade, id_estado) VALUES (1, 'São Paulo', 1);
+INSERT INTO cidade (id_cidade, nome_cidade, id_estado) VALUES (2, 'Rio de Janeiro', 2);
+INSERT INTO cidade (id_cidade, nome_cidade, id_estado) VALUES (3, 'Los Angeles', 3);
+INSERT INTO cidade (id_cidade, nome_cidade, id_estado) VALUES (4, 'La Plata', 4);
+INSERT INTO cidade (id_cidade, nome_cidade, id_estado) VALUES (5, 'Paris', 5);
  
--- Criação da tabela cidade
-CREATE TABLE cidade (
-    id_cidade   NUMBER PRIMARY KEY,
-    nome_cidade VARCHAR(30),
-    id_estado   NUMBER
-);
+INSERT INTO bairro (id_bairro, nome_bairro, id_cidade) VALUES (1, 'Moema', 1);
+INSERT INTO bairro (id_bairro, nome_bairro, id_cidade) VALUES (2, 'Copacabana', 2);
+INSERT INTO bairro (id_bairro, nome_bairro, id_cidade) VALUES (3, 'Hollywood', 3);
+INSERT INTO bairro (id_bairro, nome_bairro, id_cidade) VALUES (4, 'Centro', 4);
+INSERT INTO bairro (id_bairro, nome_bairro, id_cidade) VALUES (5, 'Montmartre', 5);
  
--- Adiciona a chave estrangeira na tabela cidade
-ALTER TABLE cidade
-    ADD CONSTRAINT fk_cidade FOREIGN KEY (id_estado)
-        REFERENCES estado (id_estado);
+INSERT INTO end_cliente (id_endereco, cep, logradouro, numero, complemento, id_bairro) 
+VALUES (1, 04077000, 'Avenida Ibirapuera', 1000, 'Apto 101', 1);
  
--- Criação da tabela bairro
-CREATE TABLE bairro (
-    id_bairro   NUMBER PRIMARY KEY,
-    nome_bairro VARCHAR(30),
-    id_cidade   NUMBER
-);
+INSERT INTO end_cliente (id_endereco, cep, logradouro, numero, complemento, id_bairro) 
+VALUES (2, 22070011, 'Avenida Atlântica', 500, 'Casa 2', 2);
  
--- Adiciona a chave estrangeira na tabela bairro
-ALTER TABLE bairro
-    ADD CONSTRAINT fk_bairro FOREIGN KEY (id_cidade)
-        REFERENCES cidade (id_cidade);
+INSERT INTO end_cliente (id_endereco, cep, logradouro, numero, complemento, id_bairro) 
+VALUES (3, 90028, 'Hollywood Boulevard', 6801, 'Suite 200', 3);
  
--- Criação da tabela end_cliente
-CREATE TABLE end_cliente (
-    id_endereco NUMBER PRIMARY KEY,
-    cep         NUMBER,
-    logradouro  VARCHAR(50),
-    numero      NUMBER,
-    complemento VARCHAR(50),
-    id_bairro   NUMBER
-);
+INSERT INTO end_cliente (id_endereco, cep, logradouro, numero, complemento, id_bairro) 
+VALUES (4, 1900, 'Calle 7', 123, 'Piso 3', 4);
  
--- Adiciona a chave estrangeira na tabela end_cliente
-ALTER TABLE end_cliente
-    ADD CONSTRAINT fk_end_client FOREIGN KEY (id_bairro)
-        REFERENCES bairro (id_bairro);
+INSERT INTO end_cliente (id_endereco, cep, logradouro, numero, complemento, id_bairro) 
+VALUES (5, 75018, 'Rue Lepic', 15, 'Apto 5', 5);
