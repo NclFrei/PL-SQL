@@ -1,0 +1,56 @@
+
+CREATE TABLE pais (
+    id_pais   NUMBER PRIMARY KEY,
+    nome_pais VARCHAR(30)
+);
+ 
+-- Criação da tabela estado com id_estado como PRIMARY KEY
+CREATE TABLE estado (
+    id_estado   NUMBER PRIMARY KEY, -- Corrigido: id_estado é PRIMARY KEY
+    nome_estado VARCHAR2(30),
+    id_pais     NUMBER
+);
+ 
+-- Adiciona a chave estrangeira na tabela estado
+ALTER TABLE estado
+    ADD CONSTRAINT fk_estado FOREIGN KEY (id_pais)
+        REFERENCES pais (id_pais);
+ 
+-- Criação da tabela cidade
+CREATE TABLE cidade (
+    id_cidade   NUMBER PRIMARY KEY,
+    nome_cidade VARCHAR(30),
+    id_estado   NUMBER
+);
+ 
+-- Adiciona a chave estrangeira na tabela cidade
+ALTER TABLE cidade
+    ADD CONSTRAINT fk_cidade FOREIGN KEY (id_estado)
+        REFERENCES estado (id_estado);
+ 
+-- Criação da tabela bairro
+CREATE TABLE bairro (
+    id_bairro   NUMBER PRIMARY KEY,
+    nome_bairro VARCHAR(30),
+    id_cidade   NUMBER
+);
+ 
+-- Adiciona a chave estrangeira na tabela bairro
+ALTER TABLE bairro
+    ADD CONSTRAINT fk_bairro FOREIGN KEY (id_cidade)
+        REFERENCES cidade (id_cidade);
+ 
+-- Criação da tabela end_cliente
+CREATE TABLE end_cliente (
+    id_endereco NUMBER PRIMARY KEY,
+    cep         NUMBER,
+    logradouro  VARCHAR(50),
+    numero      NUMBER,
+    complemento VARCHAR(50),
+    id_bairro   NUMBER
+);
+ 
+-- Adiciona a chave estrangeira na tabela end_cliente
+ALTER TABLE end_cliente
+    ADD CONSTRAINT fk_end_client FOREIGN KEY (id_bairro)
+        REFERENCES bairro (id_bairro);
